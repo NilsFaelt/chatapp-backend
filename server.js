@@ -29,7 +29,7 @@ io.on("connection", (socket) => {
     console.log(data.message);
   });
   socket.on("send_message", (data) => {
-    socket.to(data.room).emit("recive_message", data);
+    socket.to(data.room).emit("recive_message", data, socket.id);
     console.log("sneding a sms", data);
   });
 });
