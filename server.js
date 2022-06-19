@@ -33,6 +33,10 @@ io.on("connection", (socket) => {
     console.log(data.message);
   });
   socket.on("send_message", (data) => {
+    if (data.message === "") {
+      console.log("Npt allowed to send empty messages");
+      return;
+    }
     socket.to(data.room).emit("recive_message", data, socket.id);
     console.log("sneding a sms", data);
   });
