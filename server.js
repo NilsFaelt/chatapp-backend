@@ -4,7 +4,10 @@ const port = 4001;
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+const { fstat } = require("fs");
 const server = http.createServer(app);
+const fs = require("fs");
+const { db, getAllRooms } = require("./db/db");
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +18,22 @@ const io = new Server(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
+});
+io.use((socket, next) => {
+  socket.on("send_message", (data) => {
+    const fsData = JSON.stringify(data);
+    if (data.message) {
+      fs.appendFile("messageLogg.txt", fsData, (err) => {
+        if (err) {
+          console.log("Couldnt logg message, string were empty");
+        } else {
+          console.log("message logged sucessfully");
+        }
+      });
+    }
+  });
+
+  next();
 });
 
 io.on("connection", (socket) => {
@@ -31,14 +50,41 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     console.log(data.message);
+    console.log(data);
   });
   socket.on("send_message", (data) => {
     if (data.message === "") {
-      console.log("Npt allowed to send empty messages");
+      console.log("Not allowed to send empty messages");
       return;
     }
     socket.to(data.room).emit("recive_message", data, socket.id);
-    console.log("sneding a sms", data);
+  });
+  socket.on("addRoom", (data) => {
+    if (data.room === "") {
+      console.log("Couldnt add room, make sure name is correct");
+      return;
+    }
+    const sql = `INSERT INTO chatRooms(name) VALUES(?)`;
+    db.run(sql, [data.room], (err) => {
+      if (err) console.log(err);
+    });
+
+    console.log("the end");
+  });
+
+  socket.on("get_rooms", () => {
+    async function rooms() {
+      const data = await getAllRooms();
+      socket.emit("get_rooms", data);
+      console.log(data, "roomsinside");
+    }
+    rooms();
+  });
+
+  socket.on("delete_room", (data) => {
+    const delSql = `DELETE FROM chatRooms WHERE name = ?`;
+    db.run(delSql, [data]);
+    console.log(data);
   });
 });
 
