@@ -7,7 +7,7 @@ const cors = require("cors");
 const { fstat } = require("fs");
 const server = http.createServer(app);
 const fs = require("fs");
-const { db, getAllRooms } = require("./db/db");
+const { db, getAllRooms, insertMessage, getAllMessages } = require("./db/db");
 
 app.use(cors());
 app.use(express.json());
@@ -49,7 +49,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    console.log(data.message);
     console.log(data);
   });
   socket.on("send_message", (data) => {
@@ -57,7 +56,15 @@ io.on("connection", (socket) => {
       console.log("Not allowed to send empty messages");
       return;
     }
-    socket.to(data.room).emit("recive_message", data, socket.id);
+    insertMessage(data);
+    async function sendAllMessages() {
+      const allMessages = await getAllMessages(data);
+      if (allMessages) {
+        socket.to(data.room).emit("recive_message", allMessages, socket.id);
+        console.log(allMessages, "inside emit ");
+      }
+    }
+    sendAllMessages();
   });
   socket.on("addRoom", (data) => {
     if (data.room === "") {
@@ -82,8 +89,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("delete_room", (data) => {
+    const deleteMessages = `DELETE FROM messages WHERE room = ?`;
     const delSql = `DELETE FROM chatRooms WHERE name = ?`;
     db.run(delSql, [data]);
+    db.run(deleteMessages, [data]);
     console.log(data);
   });
 });

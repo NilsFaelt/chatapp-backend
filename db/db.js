@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3");
 
-const createRoomTable = `CREATE TABLE chatRooms(name TEXT NOT NULL)`;
+// const createMessages = `CREATE TABLE messages(room TEXT NOT NULL, message TEXT, user TEXT, date TEXT )`;
 
 const db = new sqlite3.Database("./sqlite.db", (error) => {
   if (error) {
@@ -8,7 +8,7 @@ const db = new sqlite3.Database("./sqlite.db", (error) => {
   }
 });
 
-// db.run(createRoomTable, (err, data) => {
+// db.run(createMessages, (err, data) => {
 //   if (err) return console.log(err);
 //   console.log("table created");
 // });
@@ -26,5 +26,32 @@ async function getAllRooms() {
     });
   });
 }
+function insertMessage(data) {
+  const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES(?,?,?,?) `;
+  db.run(
+    insertMessages,
+    [data.message, data.room, data.user, data.date],
+    (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log("message inserted succesfully");
+    }
+  );
+}
 
-module.exports = { db, getAllRooms };
+async function getAllMessages(data) {
+  const sql = `SELECT * FROM messages WHERE room = ?`;
+  return new Promise((resolve, reject) => {
+    db.all(sql, [data.room], (error, rows) => {
+      if (error) {
+        console.log(error.message);
+        reject(error);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+module.exports = { db, getAllRooms, insertMessage, getAllMessages };
