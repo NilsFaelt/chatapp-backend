@@ -7,6 +7,7 @@ const cors = require("cors");
 const { fstat } = require("fs");
 const server = http.createServer(app);
 const fs = require("fs");
+const { getRoom } = require("./functions/getRoom");
 const { db, getAllRooms, insertMessage, getAllMessages } = require("./db/db");
 
 app.use(cors());
@@ -23,7 +24,7 @@ io.use((socket, next) => {
   socket.on("send_message", (data) => {
     const fsData = JSON.stringify(data);
     if (data.message) {
-      fs.appendFile("messageLogg.txt", fsData, (err) => {
+      fs.appendFile("messageLogg.txt", fsData + "/n", (err) => {
         if (err) {
           console.log("Couldnt logg message, string were empty");
         } else {
@@ -32,7 +33,6 @@ io.use((socket, next) => {
       });
     }
   });
-
   next();
 });
 
@@ -66,17 +66,21 @@ io.on("connection", (socket) => {
     }
     sendAllMessages();
   });
+
   socket.on("addRoom", (data) => {
+    async function getTheRoom() {
+      const room = await getRoom(data.room);
+    }
+    getTheRoom();
     if (data.room === "") {
       console.log("Couldnt add room, make sure name is correct");
       return;
     }
+
     const sql = `INSERT INTO chatRooms(name) VALUES(?)`;
     db.run(sql, [data.room], (err) => {
       if (err) console.log(err);
     });
-
-    console.log("the end");
   });
 
   socket.on("get_rooms", () => {
