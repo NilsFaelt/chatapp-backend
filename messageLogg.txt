@@ -383,3 +383,6 @@
 {"message":"hje","room":"room","user":"xwq","date":"2022-6-22 22:9:26"}
 {"message":"dawg","room":"room","user":"wq","date":"2022-6-22 22:9:35"}
 {"message":"gehjbe","room":"room1","user":"wq","date":"2022-6-22 22:9:47"}
+{"message":"hsd","room":"room1","user":"wq","date":"2022-6-22 22:11:47"}
+{"message":"hje\n","room":"room55","user":"wq","date":"2022-6-22 22:12:16"}
+{"message":"hej på dig","room":"room55","user":"xwq","date":"2022-6-22 22:12:24"}
