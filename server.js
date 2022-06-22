@@ -41,9 +41,9 @@ io.on("connection", (socket) => {
     console.log(`User: ${data.user} has left room: ${data.choosenRooom}`);
   });
 
-  socket.on("send_message", (data) => {
-    console.log(data);
-  });
+  // socket.on("send_message", (data) => {
+  //   console.log(data);
+  // });
   socket.on("send_message", (data) => {
     if (data.message === "") {
       console.log("Not allowed to send empty messages");
