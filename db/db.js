@@ -13,19 +13,6 @@ const db = new sqlite3.Database("./sqlite.db", (error) => {
 //   console.log("table created");
 // });
 
-async function getAllRooms() {
-  const sql = `SELECT * FROM chatRooms`;
-  return new Promise((resolve, reject) => {
-    db.all(sql, (error, rows) => {
-      if (error) {
-        console.log(error.message);
-        reject(error);
-      }
-      resolve(rows);
-      console.log(rows);
-    });
-  });
-}
 function insertMessage(data) {
   const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES(?,?,?,?) `;
   db.run(
@@ -41,17 +28,18 @@ function insertMessage(data) {
   );
 }
 
-async function getAllMessages(data) {
-  const sql = `SELECT * FROM messages WHERE room = ?`;
+async function getAllRooms() {
+  const sql = `SELECT * FROM chatRooms`;
   return new Promise((resolve, reject) => {
-    db.all(sql, [data.room], (error, rows) => {
+    db.all(sql, (error, rows) => {
       if (error) {
         console.log(error.message);
         reject(error);
       }
       resolve(rows);
+      console.log(rows);
     });
   });
 }
 
-module.exports = { db, getAllRooms, insertMessage, getAllMessages };
+module.exports = { db, insertMessage, getAllRooms };

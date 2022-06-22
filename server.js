@@ -4,11 +4,12 @@ const port = 4001;
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
-const { fstat } = require("fs");
 const server = http.createServer(app);
-const fs = require("fs");
 const { getRoom } = require("./functions/getRoom");
-const { db, getAllRooms, insertMessage, getAllMessages } = require("./db/db");
+const { db, insertMessage } = require("./db/db");
+const loggMessages = require("./functions/loggMessages");
+const getAllMessages = require("./functions/getAllMessages");
+const getAllRooms = require("./functions/getAllRooms");
 
 app.use(cors());
 app.use(express.json());
@@ -20,18 +21,10 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+
 io.use((socket, next) => {
   socket.on("send_message", (data) => {
-    const fsData = JSON.stringify(data);
-    if (data.message) {
-      fs.appendFile("messageLogg.txt", fsData + "/n", (err) => {
-        if (err) {
-          console.log("Couldnt logg message, string were empty");
-        } else {
-          console.log("message logged sucessfully");
-        }
-      });
-    }
+    loggMessages(data);
   });
   next();
 });
@@ -61,7 +54,6 @@ io.on("connection", (socket) => {
       const allMessages = await getAllMessages(data);
       if (allMessages) {
         socket.to(data.room).emit("recive_message", allMessages, socket.id);
-        console.log(allMessages, "inside emit ");
       }
     }
     sendAllMessages();
@@ -71,6 +63,7 @@ io.on("connection", (socket) => {
     async function getTheRoom() {
       const room = await getRoom(data.room);
     }
+    console.log("roooommmmmooooomm");
     getTheRoom();
     if (data.room === "") {
       console.log("Couldnt add room, make sure name is correct");
