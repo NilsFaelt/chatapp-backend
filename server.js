@@ -3,8 +3,8 @@ const app = express();
 const port = 4001;
 const http = require("http");
 const { Server } = require("socket.io");
-const cors = require("cors");
 const server = http.createServer(app);
+const cors = require("cors");
 const { getRoom } = require("./functions/getRoom");
 const { db, insertMessage } = require("./db/db");
 const loggMessages = require("./functions/loggMessages");
@@ -42,6 +42,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
+    console.log("message recived", data);
     if (data.message === "") {
       console.log("Not allowed to send empty messages");
       return;
@@ -49,18 +50,29 @@ io.on("connection", (socket) => {
     insertMessage(data);
     async function sendAllMessages() {
       const allMessages = await getAllMessages(data);
+      console.log(allMessages, "all messages");
       if (allMessages) {
-        socket.to(data.room).emit("recive_message", allMessages, socket.id);
+        socket.to(data.room).emit("recive_message", allMessages);
       }
     }
     sendAllMessages();
+  });
+
+  socket.on("back_to_room", (data) => {
+    async function sendAllMessages() {
+      const allMessages = await getAllMessages(data);
+      console.log(allMessages, "all messages", data);
+      if (allMessages) {
+        socket.to(data.room).emit("recive_message", allMessages);
+      }
+    }
+    sendAllMessages(data);
   });
 
   socket.on("addRoom", (data) => {
     async function getTheRoom() {
       const room = await getRoom(data.room);
     }
-    console.log("roooommmmmooooomm");
     getTheRoom();
     if (data.room === "") {
       console.log("Couldnt add room, make sure name is correct");
@@ -77,7 +89,6 @@ io.on("connection", (socket) => {
     async function rooms() {
       const data = await getAllRooms();
       socket.emit("get_rooms", data);
-      console.log(data, "roomsinside");
     }
     rooms();
   });

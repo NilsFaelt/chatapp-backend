@@ -9,7 +9,6 @@ async function getAllRooms() {
         reject(error);
       }
       resolve(rows);
-      console.log(rows);
     });
   });
 }

@@ -9,7 +9,6 @@ async function getRoom(data) {
         reject(error);
       }
       resolve(rows);
-      console.log(rows);
     });
   });
 }
