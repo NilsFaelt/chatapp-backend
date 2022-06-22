@@ -325,3 +325,18 @@
 {"message":"wzzzuo","room":"room4","user":"nils","date":"2022-6-22 15:28:36"}
 {"message":"va hander ","room":"room4","user":"nils","date":"2022-6-22 15:28:41"}
 {"message":"inegt","room":"room4","user":"nils","date":"2022-6-22 15:28:55"}
+{"message":"hj","room":"die mauer ","user":"nils","date":"2022-6-22 15:45:42"}
+{"message":"hej","room":"room","user":"anna","date":"2022-6-22 16:0:56"}
+{"message":"f","room":"room","user":"anna","date":"2022-6-22 16:0:59"}
+{"message":"hej\n","room":"room","user":"anna","date":"2022-6-22 16:2:14"}
+{"message":"hje","room":"room","user":"anna","date":"2022-6-22 16:15:21"}
+{"message":"hje","room":"room","user":"nils","date":"2022-6-22 16:15:36"}
+{"message":"zzz\n","room":"room","user":"anna","date":"2022-6-22 16:15:41"}
+{"message":"hjen","room":"room","user":"nils","date":"2022-6-22 16:16:33"}
+{"message":"hje","room":"nils","user":"nisl","date":"2022-6-22 16:22:37"}
+{"message":"hje","room":"room","user":"nils","date":"2022-6-22 16:22:41"}
+{"message":"hje","room":"nils","user":"nisl","date":"2022-6-22 16:22:45"}
+{"message":"zzzzz","room":"room","user":"nils","date":"2022-6-22 16:22:52"}
+{"message":"zzz","room":"room","user":"nils","date":"2022-6-22 16:23:4"}
+{"message":"jwd","room":"room","user":"nils","date":"2022-6-22 16:29:23"}
+{"message":"sacjb","room":"room","user":"nils","date":"2022-6-22 16:29:31"}
