@@ -386,3 +386,9 @@
 {"message":"hsd","room":"room1","user":"wq","date":"2022-6-22 22:11:47"}
 {"message":"hje\n","room":"room55","user":"wq","date":"2022-6-22 22:12:16"}
 {"message":"hej på dig","room":"room55","user":"xwq","date":"2022-6-22 22:12:24"}
+{"message":"hej","room":"room5","user":"anna","date":"2022-6-23 8:19:18"}
+{"message":"nils\n","room":"room55","user":"nls","date":"2022-6-23 11:21:0"}
+{"message":"hej\n","room":"nils","user":"anna","date":"2022-6-23 13:47:30"}
+{"message":"hje","room":"nils","user":"nils","date":"2022-6-23 13:47:48"}
+{"message":"hje\n","room":"room4","user":"nils","date":"2022-6-23 13:54:50"}
+{"message":"smhca","room":"room55","user":"nils","date":"2022-6-23 13:55:48"}
