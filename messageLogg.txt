@@ -392,3 +392,5 @@
 {"message":"hje","room":"nils","user":"nils","date":"2022-6-23 13:47:48"}
 {"message":"hje\n","room":"room4","user":"nils","date":"2022-6-23 13:54:50"}
 {"message":"smhca","room":"room55","user":"nils","date":"2022-6-23 13:55:48"}
+{"message":"hej","room":"room55","user":"nil","date":"2022-8-22 14:43:24"}
+{"message":"va\n","room":"room55","user":"anna","date":"2022-8-22 14:43:38"}
