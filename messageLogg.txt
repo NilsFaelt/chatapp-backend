@@ -394,3 +394,5 @@
 {"message":"smhca","room":"room55","user":"nils","date":"2022-6-23 13:55:48"}
 {"message":"hej","room":"room55","user":"nil","date":"2022-8-22 14:43:24"}
 {"message":"va\n","room":"room55","user":"anna","date":"2022-8-22 14:43:38"}
+{"message":"hej\n","room":"room55","user":"jurg","date":"2022-8-22 21:46:51"}
+{"message":"hej\n","room":"room55","user":"anthon","date":"2022-8-22 21:46:57"}

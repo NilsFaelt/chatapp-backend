@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5001;
+const port = 4001;
 const http = require("http");
-const { Server } = require("socket.io");
 const server = http.createServer(app);
+const { Server } = require("socket.io");
 const cors = require("cors");
 const { getRoom } = require("./functions/getRoom");
 const { db, insertMessage } = require("./db/db");
