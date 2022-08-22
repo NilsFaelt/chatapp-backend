@@ -1,19 +1,17 @@
-const { Client } = require("pg");
+const sqlite3 = require("sqlite3");
 
-const createMessages = `CREATE TABLE IF NOT EXISTS messages(room TEXT NOT NULL, message TEXT, user TEXT, date INTEGER )`;
+// const createMessages = `CREATE TABLE messages(room TEXT NOT NULL, message TEXT, user TEXT, date TEXT )`;
 
-const db = new Client({
-  ssl: {
-    rejectUnauthorized: false,
-  },
-  connectionString: process.env.DATABASE_URL,
+const db = new sqlite3.Database("./sqlite.db", (error) => {
+  if (error) {
+    console.log(error);
+  }
 });
-db.connect();
 
-db.query(createMessages, (err, data) => {
-  if (err) return console.log(err);
-  console.log("table created");
-});
+// db.run(createMessages, (err, data) => {
+//   if (err) return console.log(err);
+//   console.log("table created");
+// });
 
 function insertMessage(data) {
   const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES(?,?,?,?) `;
