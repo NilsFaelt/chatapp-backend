@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 4001;
+const port = process.env.PORT;
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
       return;
     }
 
-    const sql = `INSERT INTO chatRooms(name) VALUES(?)`;
+    const sql = `INSERT INTO chatRooms(name) VALUES($1)`;
     db.run(sql, [data.room], (err) => {
       if (err) console.log(err);
     });
@@ -94,8 +94,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("delete_room", (data) => {
-    const deleteMessages = `DELETE FROM messages WHERE room = ?`;
-    const delSql = `DELETE FROM chatRooms WHERE name = ?`;
+    const deleteMessages = `DELETE FROM messages WHERE room = $1`;
+    const delSql = `DELETE FROM chatRooms WHERE name = $1`;
     db.query(delSql, [data]);
     db.query(deleteMessages, [data]);
     console.log(data);
