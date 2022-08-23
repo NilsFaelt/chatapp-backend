@@ -10,7 +10,6 @@ const { db, insertMessage } = require("./db/db");
 const loggMessages = require("./functions/loggMessages");
 const getAllMessages = require("./functions/getAllMessages");
 const getAllRooms = require("./functions/getAllRooms");
-console.log(process.env);
 
 app.use(cors());
 app.use(express.json());
