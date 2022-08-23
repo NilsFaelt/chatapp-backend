@@ -96,8 +96,8 @@ io.on("connection", (socket) => {
   socket.on("delete_room", (data) => {
     const deleteMessages = `DELETE FROM messages WHERE room = ?`;
     const delSql = `DELETE FROM chatRooms WHERE name = ?`;
-    db.run(delSql, [data]);
-    db.run(deleteMessages, [data]);
+    db.query(delSql, [data]);
+    db.query(deleteMessages, [data]);
     console.log(data);
   });
 });
