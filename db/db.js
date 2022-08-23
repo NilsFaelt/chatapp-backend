@@ -14,7 +14,7 @@ db.connect();
 db.query(createMessages, (err) => {
   if (err) {
     console.log(err, "table created");
-    throw error;
+    throw err;
   }
 });
 
@@ -26,7 +26,7 @@ function insertMessage(data) {
     (err) => {
       if (err) {
         console.log(err);
-        throw error;
+        throw err;
       }
       console.log("message inserted succesfully");
     }
