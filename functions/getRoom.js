@@ -6,7 +6,6 @@ async function getRoom(data) {
   db.all(sql, [data], (error, rows) => {
     if (error) {
       console.log(error.message);
-      reject(error);
     }
     return rows;
   });

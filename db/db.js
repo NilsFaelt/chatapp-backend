@@ -11,9 +11,9 @@ const db = new Client({
 
 db.connect();
 
-db.query(createMessages, (err) => {
-  if (err) {
-    console.log(err, "table created");
+db.query(createMessages, (error) => {
+  if (error) {
+    console.log(error.message);
     throw err;
   }
 });
@@ -26,7 +26,6 @@ function insertMessage(data) {
     (err) => {
       if (err) {
         console.log(err);
-        throw err;
       }
       console.log("message inserted succesfully");
       return insertMessage;
