@@ -2,11 +2,11 @@ const sqlite3 = require("sqlite3");
 
 // const createMessages = `CREATE TABLE messages(room TEXT NOT NULL, message TEXT, user TEXT, date TEXT )`;
 
-const db = new sqlite3.Database("./sqlite.db", (error) => {
-  if (error) {
-    console.log(error);
-  }
-});
+// const db = new sqlite3.Database("./sqlite.db", (error) => {
+//   if (error) {
+//     console.log(error);
+//   }
+// });
 
 // db.run(createMessages, (err, data) => {
 //   if (err) return console.log(err);
