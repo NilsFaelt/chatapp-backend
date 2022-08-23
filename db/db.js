@@ -1,6 +1,7 @@
 const { Client } = require("pg");
 
-const createMessages = `CREATE TABLE IF NOT EXISTS messages(chatRooms TEXT NOT NULL, message TEXT, user TEXT, date TEXT )`;
+const createMessages = `CREATE TABLE IF NOT EXISTS messages(room TEXT NOT NULL, message TEXT, user TEXT, date TEXT )`;
+const createChatRooms = `CREATE TABLE IF NOT EXISTS chatRooms(name TEXT)`;
 
 const db = new Client({
   ssl: {
@@ -17,9 +18,15 @@ db.query(createMessages, (error) => {
     // throw error;
   }
 });
+db.query(createMessages, (error) => {
+  if (error) {
+    console.log(error.message);
+    // throw error;
+  }
+});
 
 function insertMessage(data) {
-  const insertMessages = `INSERT INTO messages(message, chatRooms, user, date) VALUES($1, $2, $3, $4)`;
+  const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES($1, $2, $3, $4)`;
   return db.query(
     insertMessages,
     [data.message, data.room, data.user, data.date],
