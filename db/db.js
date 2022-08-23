@@ -11,11 +11,11 @@ const db = new Client({
 
 db.connect();
 
-// db.query(createMessages, (err) => {
-//   if (err) return console.log(err);
-//   console.log("table created");
-//   throw error;
-// });
+db.query(createMessages, (err) => {
+  if (err) return console.log(err);
+  console.log("table created");
+  throw error;
+});
 
 function insertMessage(data) {
   const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES($1, $2, $3, $4) `;
