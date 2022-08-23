@@ -18,7 +18,7 @@ db.query(createMessages, (error) => {
     // throw error;
   }
 });
-db.query(createMessages, (error) => {
+db.query(createChatRooms, (error) => {
   if (error) {
     console.log(error.message);
     // throw error;
