@@ -20,7 +20,7 @@ db.query(createMessages, (err) => {
 
 function insertMessage(data) {
   const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES($1, $2, $3, $4)`;
-  db.query(
+  return db.query(
     insertMessages,
     [data.message, data.room, data.user, data.date],
     (err) => {
@@ -29,6 +29,7 @@ function insertMessage(data) {
         throw err;
       }
       console.log("message inserted succesfully");
+      return insertMessage;
     }
   );
 }
