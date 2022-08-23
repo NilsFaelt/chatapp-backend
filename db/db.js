@@ -12,7 +12,9 @@ const db = new Client({
 db.connect();
 
 db.query(createMessages, (err) => {
-  if (err) console.log("table created");
+  if (err) {
+    console.log("table created");
+  }
   throw error;
 });
 
