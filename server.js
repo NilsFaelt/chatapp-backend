@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
     }
 
     const sql = `INSERT INTO chatRooms(name) VALUES($1)`;
-    db.run(sql, [data.room], (err) => {
+    db.query(sql, [data.room], (err) => {
       if (err) console.log(err);
     });
   });
