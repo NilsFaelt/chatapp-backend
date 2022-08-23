@@ -6,7 +6,6 @@ async function getAllMessages(data) {
   db.query(sql, [data.room], function (error, room) {
     if (error) {
       console.log(error.message);
-      reject(error);
     }
     return room;
   });
