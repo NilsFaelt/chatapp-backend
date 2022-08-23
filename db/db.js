@@ -13,7 +13,7 @@ db.connect();
 
 db.query(createMessages, (err) => {
   if (err) {
-    console.log("table created");
+    console.log(err, "table created");
   }
   throw error;
 });
