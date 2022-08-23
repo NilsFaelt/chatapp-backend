@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const io = new Server(server, {
   cors: {
-    origin: ["https://chatt-app-client.herokuapp.com"],
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
   },
