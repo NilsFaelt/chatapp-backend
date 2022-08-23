@@ -14,7 +14,7 @@ db.connect();
 db.query(createMessages, (error) => {
   if (error) {
     console.log(error.message);
-    throw erro;
+    throw error;
   }
 });
 
