@@ -3,7 +3,7 @@ const { db } = require("../db/db");
 async function getRoom(data) {
   const sql = `SELECT * FROM chatRooms WHERE name = ? `;
 
-  db.all(sql, [data], (error, rows) => {
+  db.query(sql, [data], (error, rows) => {
     if (error) {
       console.log(error.message);
     }
