@@ -1,7 +1,7 @@
 const { db } = require("../db/db");
 
 async function getAllMessages(data) {
-  const sql = `SELECT * FROM messages WHERE room = ?`;
+  const sql = `SELECT * FROM messages WHERE room = $1`;
 
   db.query(sql, [data.room], function (error, results) {
     if (error) {
