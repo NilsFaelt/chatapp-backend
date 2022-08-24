@@ -3,11 +3,11 @@ const { db } = require("../db/db");
 function getAllRooms() {
   const sql = `SELECT * FROM chatRooms`;
 
-  return db.query(sql, function (error, rows) {
+  return db.query(sql, function (error, results) {
     if (error) {
       console.log(error.message);
     }
-    return rows;
+    return results.rows;
   });
 }
 
