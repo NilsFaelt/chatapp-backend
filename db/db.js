@@ -2,7 +2,7 @@ const { Client } = require("pg");
 
 const createMessages = `CREATE TABLE IF NOT EXISTS messages(message TEXT, room TEXT, user TEXT, date TEXT)`;
 const createChatRooms = `CREATE TABLE IF NOT EXISTS chatRooms(name TEXT)`;
-const testRoom = `CREATE TABLE IF NOT EXISTS mess(message TEXT, room TEXT)`;
+const testRoom = `CREATE TABLE IF NOT EXISTS sms(message TEXT, room TEXT, user TEXT, date TEXT)`;
 
 const db = new Client({
   ssl: {
