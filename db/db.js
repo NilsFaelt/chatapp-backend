@@ -27,7 +27,7 @@ db.query(createChatRooms, (error) => {
 });
 
 function insertMessage(data) {
-  const insertMessages = `INSERT INTO messages(message, room, user, date) VALUES($1, $2, $3, $4)`;
+  const insertMessages = `INSERT INTO messages(message, room, name, date) VALUES($1, $2, $3, $4)`;
   return db.query(
     insertMessages,
     [data.message, data.room, data.user, data.date],
