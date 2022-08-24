@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 
-const createMessages = `CREATE TABLE IF NOT EXISTS messages(room TEXT NOT NULL, message TEXT, user TEXT, date TEXT )`;
+const createMessages = `CREATE TABLE IF NOT EXISTS messages(room TEXT, message TEXT, user TEXT, date TEXT )`;
 const createChatRooms = `CREATE TABLE IF NOT EXISTS chatRooms(name TEXT)`;
 
 const db = new Client({
