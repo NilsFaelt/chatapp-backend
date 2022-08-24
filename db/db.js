@@ -33,7 +33,7 @@ async function insertMessage(data) {
     data.date,
   ]);
 
-  return insertMessage.rows;
+  return insertMessage;
 }
 
 module.exports = { db, insertMessage };
