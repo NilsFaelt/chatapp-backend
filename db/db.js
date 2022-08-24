@@ -2,6 +2,7 @@ const { Client } = require("pg");
 
 const createMessages = `CREATE TABLE IF NOT EXISTS messages(message TEXT, room TEXT, user TEXT, date TEXT)`;
 const createChatRooms = `CREATE TABLE IF NOT EXISTS chatRooms(name TEXT)`;
+const testRoom = `CREATE TABLE IF NOT EXISTS mess(message TEXT, room TEXT)`;
 
 const db = new Client({
   ssl: {
@@ -12,7 +13,7 @@ const db = new Client({
 
 db.connect();
 
-db.query(createMessages, (error) => {
+db.query(testRoom, (error) => {
   if (error) {
     console.log(error.message);
     // throw error;
