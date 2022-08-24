@@ -1,14 +1,10 @@
 const { db } = require("../db/db");
 
-function getAllRooms() {
+async function getAllRooms() {
   const sql = `SELECT * FROM chatRooms`;
 
-  return db.query(sql, function (error, results) {
-    if (error) {
-      console.log(error.message);
-    }
-    return results;
-  });
+  const result = await db.query(sql);
+  return result.rows;
 }
 
 module.exports = getAllRooms;
