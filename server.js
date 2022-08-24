@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
     }
     insertMessage(data);
     async function sendAllMessages() {
-      const allMessages = await getAllMessages(data);
+      const allMessages = await getAllMessages(data.room);
       console.log(allMessages, "all messages");
       if (allMessages) {
         socket.to(data.room).emit("recive_message", allMessages);
