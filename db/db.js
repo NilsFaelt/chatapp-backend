@@ -1,6 +1,4 @@
 const { Client } = require("pg");
-
-const createMessages = `CREATE TABLE IF NOT EXISTS messages(message TEXT, room TEXT, user TEXT, date TEXT)`;
 const createChatRooms = `CREATE TABLE IF NOT EXISTS chatRooms(name TEXT)`;
 const testRoom = `CREATE TABLE IF NOT EXISTS messages(message TEXT, room TEXT, name TEXT, date TEXT)`;
 
@@ -26,19 +24,16 @@ db.query(createChatRooms, (error) => {
   }
 });
 
-function insertMessage(data) {
+async function insertMessage(data) {
   const insertMessages = `INSERT INTO messages(message, room, name, date) VALUES($1, $2, $3, $4)`;
-  return db.query(
-    insertMessages,
-    [data.message, data.room, data.user, data.date],
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log("message inserted succesfully");
-      return insertMessage;
-    }
-  );
+  const reult = await db.query(insertMessages, [
+    data.message,
+    data.room,
+    data.user,
+    data.date,
+  ]);
+
+  return insertMessage.rows;
 }
 
 module.exports = { db, insertMessage };
