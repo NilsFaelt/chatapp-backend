@@ -7,7 +7,7 @@ function getAllRooms() {
     if (error) {
       console.log(error.message);
     }
-    return results.rows;
+    return results;
   });
 }
 
